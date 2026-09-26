@@ -20,6 +20,7 @@ import {
   ExternalLink,
   FileBarChart,
   Filter,
+  FolderOpen,
   HelpCircle,
   LayoutDashboard,
   ListFilter,
@@ -42,6 +43,7 @@ import {
   Zap,
 } from "lucide-react";
 import type { ReactNode } from "react";
+import FileLibrary from "@/components/FileLibrary";
 
 type View =
   | "overview"
@@ -49,7 +51,8 @@ type View =
   | "receiving"
   | "orders"
   | "movements"
-  | "reports";
+  | "reports"
+  | "files";
 type StockStatus = "In stock" | "Low stock" | "Out of stock";
 type OrderStatus = "Pending" | "Picking" | "Ready" | "Completed";
 type MovementType = "Received" | "Released" | "Transferred" | "Adjusted";
@@ -112,6 +115,7 @@ const navItems: {
   },
   { id: "movements", label: "Stock movements", icon: RefreshCw },
   { id: "reports", label: "Reports & alerts", icon: FileBarChart, count: "5" },
+  { id: "files", label: "File storage", icon: FolderOpen },
 ];
 
 const initialProducts: Product[] = [
@@ -3767,6 +3771,8 @@ export default function Home() {
         return <Movements showToast={showToast} />;
       case "reports":
         return <Reports showToast={showToast} onView={selectView} />;
+      case "files":
+        return <FileLibrary showToast={showToast} />;
     }
   }, [view, products, inventorySearch, orders]);
   if (!loggedIn) return <LoginScreen onLogin={() => setLoggedIn(true)} />;
