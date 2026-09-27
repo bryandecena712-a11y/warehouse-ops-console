@@ -1,5 +1,5 @@
 {
-    "buildCommand": "pnpm --filter client build && cp -r client/dist dist",
+    "buildCommand": "pnpm run build",
     "outputDirectory": "dist",
     "rewrites": [{
         "source": "/(.*)",
